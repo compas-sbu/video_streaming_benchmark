@@ -1,0 +1,14 @@
+---
+- hosts: server
+  tasks:
+  - name: Clear client host list
+    local_action: command truncate -s 0 hostlist.client
+- hosts: clients
+  vars:
+    streaming_client_dir: /streaming_client
+  tasks:
+  - name: Copy logs to client
+    synchronize: src=./logs/ dest={{streaming_client_dir}}/logs/
+    sudo: yes
+  - name: Add client to host list
+    local_action: shell echo "{{inventory_hostname}} {{ips}}" >> hostlist.client

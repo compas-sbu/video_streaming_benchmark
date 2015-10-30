@@ -1,0 +1,16 @@
+Modify ansible-inventory.ini, listing the IPs of the server and any client
+machines.  For each client machine, specify four IP aliases to be created.
+
+Install the benchmark on server and clients:
+	ansible-playbook -i ansible-inventory.ini -v install.yml
+(note: /streaming_server on the server should have enough space for the video dataset)
+
+Generate the "video" files and client logs based on the parameters in filegen_params/:
+	ansible-playbook -i ansible-inventory.ini -v run_gen_dataset.yml 
+
+Distribute the client logs to the client machines:
+	ansible-playbook -i ansible-inventory.ini -v run_distribute_dataset.yml 
+
+To run the benchmark:
+	./benchmark.sh
+(note: run parameters are set at the top of benchmark.sh)
