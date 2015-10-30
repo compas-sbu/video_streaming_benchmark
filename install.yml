@@ -23,6 +23,7 @@
   - name: Remove docker container named streaming_server if it exists
     command: sudo docker rm -f streaming_server
     sudo: yes
+    ignore_errors: yes
   - name: Build the server docker
     command: sudo docker build -t streaming_server streaming_benchmark/docker_server
     sudo: yes
@@ -35,6 +36,7 @@
   - name: Remove docker container named streaming_client if it exists
     command: sudo docker rm -f streaming_client
     sudo: yes
+    ignore_errors: yes
   - name: Build the client docker
     command: sudo docker build -t streaming_client streaming_benchmark/docker_client
     sudo: yes

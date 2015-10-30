@@ -10,6 +10,8 @@
     sudo: yes
   - name: Generate video files and logs
     command: docker exec {{server_docker}} {{filegen_dir}}/generate_video_files_and_logs.sh {{streaming_server_dir}}/filegen_params {{streaming_server_dir}}/videos
+  - name: Restart NGINX
+    command: docker exec {{server_docker}} service nginx restart
   - name: Create shared logs directory
     file: path={{streaming_server_dir}}/logs state=directory
     sudo: yes
