@@ -22,7 +22,7 @@ do
 	ips=$(echo ${d[@]:1:100} | sed -e 's/-[^ ]*//g' -e 's/ /,/g')
 	ssh $host "sudo mkdir -m 0777 -p $remoteOutputPath/results"
 	echo "Launching clients on $host";
-	for i in $(seq 1 $numClientPerHost)
+	for i in $(seq 1 $numClientsPerHost)
 	do
 	cmd="./httperf --hog --server $videoServerIp --videosesslog=[$logs],[0.1,0.3,0.4,0.2],[$ips] --epoll --recv-buffer=524288 --port 80 --output-log=$remoteOutputPath/results/result$i.log --num-sessions=$numSessions --rate=$rate"
 	echo "Running command $cmd"
